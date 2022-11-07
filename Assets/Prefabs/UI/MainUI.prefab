@@ -109,10 +109,10 @@ RectTransform:
   m_Father: {fileID: 7800516156356883656}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -937.99994}
-  m_SizeDelta: {x: 308.796, y: 97.998}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 631}
+  m_SizeDelta: {x: 308.796, y: 97.99805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &101931339
 CanvasRenderer:
@@ -246,9 +246,9 @@ RectTransform:
   m_Father: {fileID: 7800516156356883656}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1038}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 531}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &770495339
@@ -585,6 +585,8 @@ MonoBehaviour:
   _minus1Button: {fileID: 1917028001149736319}
   _plus10Button: {fileID: 3873157608283320894}
   _minus10Button: {fileID: 2879100821095161157}
+  _plus100Button: {fileID: 2436767797102496108}
+  _minus100Button: {fileID: 1974707919423480305}
   _slider: {fileID: 770495339}
 --- !u!1001 &368621196085168647
 PrefabInstance:
@@ -708,6 +710,30 @@ PrefabInstance:
 --- !u!114 &1917028001149736319 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2271852471340490616, guid: d8298053297404132842ca69a692d5ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 368621196085168647}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1974707919423480305 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2196078100665936886, guid: d8298053297404132842ca69a692d5ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 368621196085168647}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2436767797102496108 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2651697007285093227, guid: d8298053297404132842ca69a692d5ae,
     type: 3}
   m_PrefabInstance: {fileID: 368621196085168647}
   m_PrefabAsset: {fileID: 0}
