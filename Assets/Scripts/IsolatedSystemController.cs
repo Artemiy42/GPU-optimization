@@ -36,7 +36,7 @@ namespace GpuOptimization
 
         private void FixedUpdate()
         {
-            // _isolatedSystem.Tick();   
+            _isolatedSystem.Tick();   
         }
         
         private void PlusButtonHandler(int value)

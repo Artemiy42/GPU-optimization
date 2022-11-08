@@ -40,7 +40,7 @@ namespace GpuOptimization
             _minus1Button.OnClickAsObservable().Subscribe(_ => MinusButtonHandler(1)).AddTo(_disposables);
             _minus10Button.OnClickAsObservable().Subscribe(_ => MinusButtonHandler(10)).AddTo(_disposables);
             _minus100Button.OnClickAsObservable().Subscribe(_ => MinusButtonHandler(100)).AddTo(_disposables);
-            // _slider.onValueChanged.AsObservable().Subscribe(_ => OnSliderChangeHandler()).AddTo(_disposables);
+            _slider.onValueChanged.AsObservable().Subscribe(_ => OnSliderChangeHandler()).AddTo(_disposables);
         }
 
         private void OnSliderChangeHandler()

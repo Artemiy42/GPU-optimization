@@ -18,7 +18,6 @@ Shader "Custom/Unlit/Body"
 			#pragma multi_compile_instancing
             
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             
             struct appdata
@@ -49,7 +48,6 @@ Shader "Custom/Unlit/Body"
 
                 UNITY_SETUP_INSTANCE_ID(v);
 	            UNITY_TRANSFER_INSTANCE_ID(v, o);
-	            UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
                 
                 o.vertex = TransformObjectToHClip(v.vertex);
                 o.normal = TransformObjectToWorldNormal(v.normal);
@@ -60,6 +58,7 @@ Shader "Custom/Unlit/Body"
 
             half4 frag(v2f i) : SV_Target
             {
+                UNITY_SETUP_INSTANCE_ID(i);
                 float4 _MainColorInstance = UNITY_ACCESS_INSTANCED_PROP(BodyBuffer, _MainColor);
                 Light mainLight = GetMainLight();
                 float dotLight = dot(i.normal, mainLight.direction);

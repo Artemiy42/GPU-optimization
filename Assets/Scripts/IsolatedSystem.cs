@@ -141,6 +141,7 @@ namespace GpuOptimization
                     
                     // bodyMover.transform.position += -bodyMover.Direction * (directionToCollider.magnitude - body.Radius); 
                     bodyMover.Direction = reflectDirection;
+                    // body.View.SetRandomColor();
                     continue;
                 }
 
@@ -164,6 +165,7 @@ namespace GpuOptimization
 
                     var backDirection = plane.normal * Mathf.Abs(extraDistance);
                     body.transform.position += backDirection;
+                    body.View.SetRandomColor();
                     // Debug.Log($" dir: {backDirection} distanceToPoint: {distanceToPoint}");
                 }
             }
