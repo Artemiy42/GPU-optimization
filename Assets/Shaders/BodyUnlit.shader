@@ -24,6 +24,7 @@ Shader "Custom/Unlit/Body"
             #pragma multi_compile _LIGHT_ON _LIGHT_OFF
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
             #pragma multi_compile _ _ADDITIONAL_LIGHTS
+            // #pragma multi_compile_prepassfinal
 			#pragma multi_compile_instancing
             
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
