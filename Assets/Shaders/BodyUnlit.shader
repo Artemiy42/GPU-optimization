@@ -2,7 +2,10 @@ Shader "Custom/Unlit/Body"
 {
     Properties
     {
-        _MainColor("Color", Color) = (0,0,0,0) 
+        _MainColor("Color", Color) = (0,0,0,1) 
+        _Specular("Specular", Float) = 1
+        _Smoothness("Smoothness", Float) = 1
+        [KeywordEnum(Off, On)] _Light("Light", Float) = 0
     }
     SubShader
     {
@@ -11,10 +14,16 @@ Shader "Custom/Unlit/Body"
 
         Pass
         {
+            Name "ForwardLit"
+            Tags{"LightMode" = "UniversalForward"}
+         
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
+            #pragma multi_compile _LIGHT_ON _LIGHT_OFF
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS
 			#pragma multi_compile_instancing
             
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -30,16 +39,19 @@ Shader "Custom/Unlit/Body"
             };
 
             struct v2f
-            {
+            { 
                 float2 uv : TEXCOORD0;
-                float3 normal : NORMAL;
-                float4 vertex : SV_POSITION;
+                float3 normalWS : NORMAL;
+                float4 positionCS : SV_POSITION;
+                float3 positionWS : TEXCOORD1;
                 
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             UNITY_INSTANCING_BUFFER_START(BodyBuffer)
                 UNITY_DEFINE_INSTANCED_PROP(float4, _MainColor)
+                UNITY_DEFINE_INSTANCED_PROP(float, _Specular)
+                UNITY_DEFINE_INSTANCED_PROP(float, _Smoothness)
             UNITY_INSTANCING_BUFFER_END(BodyBuffer)
             
             v2f vert(appdata v)
@@ -48,21 +60,40 @@ Shader "Custom/Unlit/Body"
 
                 UNITY_SETUP_INSTANCE_ID(v);
 	            UNITY_TRANSFER_INSTANCE_ID(v, o);
-                
-                o.vertex = TransformObjectToHClip(v.vertex);
-                o.normal = TransformObjectToWorldNormal(v.normal);
+
+                o.positionWS = TransformObjectToWorld(v.vertex);
+                o.positionCS = TransformWorldToHClip(o.positionWS);
+                o.normalWS = TransformObjectToWorldNormal(v.normal);
                 o.uv = v.uv;
 	            
                 return o;
             }
 
-            half4 frag(v2f i) : SV_Target
+            half4 frag(v2f input) : SV_Target 
             {
-                UNITY_SETUP_INSTANCE_ID(i);
-                float4 _MainColorInstance = UNITY_ACCESS_INSTANCED_PROP(BodyBuffer, _MainColor);
-                Light mainLight = GetMainLight();
-                float dotLight = dot(i.normal, mainLight.direction);
-                return _MainColorInstance * dotLight;
+                UNITY_SETUP_INSTANCE_ID(input);
+
+                float4 color;
+
+                #if _LIGHT_ON
+	            InputData lightingInput = (InputData)0;
+                lightingInput.normalWS = input.normalWS;
+                lightingInput.positionWS = input.positionWS;
+                lightingInput.viewDirectionWS = GetWorldSpaceNormalizeViewDir(input.positionWS);
+                lightingInput.shadowCoord = TransformWorldToShadowCoord(input.positionWS);
+                                
+	            SurfaceData surfaceInput = (SurfaceData)0;
+                surfaceInput.albedo = UNITY_ACCESS_INSTANCED_PROP(BodyBuffer, _MainColor);
+                surfaceInput.alpha = 1;
+                surfaceInput.specular = UNITY_ACCESS_INSTANCED_PROP(BodyBuffer, _Specular);
+                surfaceInput.smoothness = UNITY_ACCESS_INSTANCED_PROP(BodyBuffer, _Smoothness);
+
+	            color = UniversalFragmentBlinnPhong(lightingInput, surfaceInput);
+                #elif _LIGHT_OFF
+                color = UNITY_ACCESS_INSTANCED_PROP(BodyBuffer, _MainColor);
+                #endif
+
+                return color;
             }
             ENDHLSL
         }

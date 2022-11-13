@@ -52,7 +52,7 @@ namespace GpuOptimization
             body.Initialize();
             body.Mover.Speed = _currentSpeed;
 
-            PlaceBodyInEmptySpace(body);
+            PlaceBodyInCube(body);
 
             _bodies.Add(body);
         }
@@ -130,29 +130,31 @@ namespace GpuOptimization
         {
             foreach (var body in _bodies)
             {
-                var amountCollisions = Physics.OverlapSphereNonAlloc(body.transform.position, body.transform.localScale.x / 2, _colliders, LayerMask.GetMask("Body"));
-                var bodyMover = body.Mover;
-                
-                if (amountCollisions > 1)
-                {
-                    var directionToCollider = bodyMover.transform.position - _colliders[1].transform.position;
-                    var normalizedDirectionToCollider = directionToCollider.normalized;
-                    var reflectDirection = Vector3.Reflect(bodyMover.Direction, normalizedDirectionToCollider).normalized;
-                    
-                    // bodyMover.transform.position += -bodyMover.Direction * (directionToCollider.magnitude - body.Radius); 
-                    bodyMover.Direction = reflectDirection;
-                    // body.View.SetRandomColor();
-                    continue;
-                }
+                // var amountCollisions = Physics.OverlapSphereNonAlloc(body.transform.position, body.transform.localScale.x / 2, _colliders, LayerMask.GetMask("Body"));
+                // var bodyMover = body.Mover;
+                //
+                // if (amountCollisions > 1)
+                // {
+                //     var directionToCollider = bodyMover.transform.position - _colliders[1].transform.position;
+                //     var normalizedDirectionToCollider = directionToCollider.normalized;
+                //     var reflectDirection = Vector3.Reflect(bodyMover.Direction, normalizedDirectionToCollider).normalized;
+                //     
+                //     // bodyMover.transform.position += -bodyMover.Direction * (directionToCollider.magnitude - body.Radius); 
+                //     bodyMover.Direction = reflectDirection;
+                //     // body.View.SetRandomColor();
+                //     continue;
+                // }
 
                 CheckCollisionWithBorders(body);
+                body.Tick();
             }   
         }
 
         private void CheckCollisionWithBorders(Body body)
         {
-            foreach (var plane in _planes)
+            for (var i = 0; i < _planes.Length; i++)
             {
+                var plane = _planes[i];
                 var distanceToPoint = plane.GetDistanceToPoint(body.transform.position);
                 if (distanceToPoint < body.Radius)
                 {
@@ -166,6 +168,7 @@ namespace GpuOptimization
                     var backDirection = plane.normal * Mathf.Abs(extraDistance);
                     body.transform.position += backDirection;
                     body.View.SetRandomColor();
+                    i++;
                     // Debug.Log($" dir: {backDirection} distanceToPoint: {distanceToPoint}");
                 }
             }
@@ -179,7 +182,7 @@ namespace GpuOptimization
             }
         }
 
-        private void PlaceBodyInEmptySpace(Body body)
+        private void PlaceBodyInCube(Body body)
         {
             var bounds = _borders.Bounds;
             bounds.size -= Vector3.one * (body.Radius + 1f);

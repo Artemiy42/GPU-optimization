@@ -8,9 +8,11 @@ namespace GpuOptimization
         private static MaterialPropertyBlock _materialPropertyBlock;
         
         [SerializeField] private MeshRenderer _meshRenderer;
+        [SerializeField] private Material _material;
 
         public void Start()
         {
+            _meshRenderer.material = _material;
             _materialPropertyBlock ??= new MaterialPropertyBlock();
         }
         

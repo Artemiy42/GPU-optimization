@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -155,6 +155,7 @@ MonoBehaviour:
   _bodyParent: {fileID: 308194338}
   _borders: {fileID: 1192217231}
   mainUi: {fileID: 376387872}
+  _updateBodies: 0
 --- !u!4 &308194338
 Transform:
   m_ObjectHideFlags: 0
@@ -432,6 +433,10 @@ PrefabInstance:
     - target: {fileID: 177638, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_Name
       value: '[Graphy]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 177638, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_audioModuleState
@@ -767,7 +772,7 @@ PrefabInstance:
     - target: {fileID: 8004877871761047390, guid: ef1c6784d764749ff9d41e7b82c8423a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef1c6784d764749ff9d41e7b82c8423a, type: 3}
@@ -1120,7 +1125,7 @@ PrefabInstance:
     - target: {fileID: 8004877871761047390, guid: ef1c6784d764749ff9d41e7b82c8423a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef1c6784d764749ff9d41e7b82c8423a, type: 3}
@@ -1290,7 +1295,7 @@ PrefabInstance:
     - target: {fileID: 8004877871761047390, guid: ef1c6784d764749ff9d41e7b82c8423a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef1c6784d764749ff9d41e7b82c8423a, type: 3}
@@ -1307,12 +1312,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723531023}
     m_Modifications:
+    - target: {fileID: 101931336, guid: 47e893843839b4c5ba07575733b5f2e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 770495337, guid: 47e893843839b4c5ba07575733b5f2e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1650138865, guid: 47e893843839b4c5ba07575733b5f2e2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2141227202, guid: 47e893843839b4c5ba07575733b5f2e2, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804343286109933844, guid: 47e893843839b4c5ba07575733b5f2e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133401335116803488, guid: 47e893843839b4c5ba07575733b5f2e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267493888114391433, guid: 47e893843839b4c5ba07575733b5f2e2,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7800516156356883656, guid: 47e893843839b4c5ba07575733b5f2e2,
@@ -1562,7 +1590,7 @@ PrefabInstance:
     - target: {fileID: 8004877871761047390, guid: ef1c6784d764749ff9d41e7b82c8423a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef1c6784d764749ff9d41e7b82c8423a, type: 3}

@@ -8,6 +8,8 @@ namespace GpuOptimization
         [SerializeField] private Transform _bodyParent;
         [SerializeField] private Borders _borders;
         [SerializeField] private MainUi mainUi;
+        [SerializeField] private bool _updateBodies;
+        
         
         private GameFactory _gameFactory;
         private IsolatedSystem _isolatedSystem;
@@ -36,7 +38,10 @@ namespace GpuOptimization
 
         private void FixedUpdate()
         {
-            _isolatedSystem.Tick();   
+            if (_updateBodies)
+            {
+                _isolatedSystem.Tick();
+            }
         }
         
         private void PlusButtonHandler(int value)
