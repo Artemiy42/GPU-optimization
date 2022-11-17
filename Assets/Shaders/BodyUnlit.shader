@@ -6,6 +6,7 @@ Shader "Custom/Unlit/Body"
         _Specular("Specular", Float) = 1
         _Smoothness("Smoothness", Float) = 1
         [KeywordEnum(Off, On)] _Light("Light", Float) = 0
+        [KeywordEnum(Off, On)] _Additional_Light("Additional Light", Float) = 0
     }
     SubShader
     {
@@ -22,8 +23,11 @@ Shader "Custom/Unlit/Body"
             #pragma fragment frag
 
             #pragma multi_compile _LIGHT_ON _LIGHT_OFF
+            #pragma multi_compile _ADDITIONAL_LIGHT_ON _ADDITIONAL_LIGHT_OFF
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #if _ADDITIONAL_LIGHT_ON
             #pragma multi_compile _ _ADDITIONAL_LIGHTS
+            #endif
             // #pragma multi_compile_prepassfinal
 			#pragma multi_compile_instancing
             
